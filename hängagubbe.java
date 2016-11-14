@@ -14,7 +14,7 @@ public class hängagubbe {
 
     private static char[] foundLetters; //Array med alla bokstäver man hittat
     private static char[] lettersGuessed = new char[26]; //Antal bokstäver man gissat på, 26 för att man bara kan gissa på engelska bokstäver.
-    private static int lettersGussedCounter = 0; //Troligtvis onödig men det fungerar på det här sättet.
+    private static int lettersGuessedCounter = 0; //Troligtvis onödig men det fungerar på det här sättet.
 
     private static int Lives = 8; //Antal liv man har.
 
@@ -52,7 +52,7 @@ public class hängagubbe {
         Play();
     }
 
-    private static void Play() {
+    private static void Play() throws IOException {
         while(Lives > 0 && playing) { //While-loop som körs medans man har över 0 liv och inte vunnit.
 
 			/*
@@ -60,7 +60,7 @@ public class hängagubbe {
 			 */
             System.out.println("Lives: " + Lives);
             System.out.println("Letters guessed: ");
-            for(int i = 0; i < lettersGussedCounter; i++) {
+            for(int i = 0; i < lettersGuessedCounter; i++) {
                 System.out.print(lettersGuessed[i] + ", ");
             }
             System.out.print("\n");
@@ -78,8 +78,8 @@ public class hängagubbe {
                  * Lägg till bokstäverna i en array som innehåller alla bokstäver som är gissade.
                  */
                 if(!String.valueOf(lettersGuessed).contains(userGuess)) {
-                    lettersGuessed[lettersGussedCounter] = userGuess.charAt(0);
-                    lettersGussedCounter++;
+                    lettersGuessed[lettersGuessedCounter] = userGuess.charAt(0);
+                    lettersGuessedCounter++;
                 }
 
                 //Loopar igenom hela randomWord för att kolla ifall användarens input matchar någon bokstav i ordet.
@@ -150,7 +150,8 @@ public class hängagubbe {
 
         while ((read = fileInputStream.read(buffer)) != -1) { //Körs medans det finns rader kvar att läsas.
             for (int i = 0; i < read; i++) { //read är antalet bokstäver i raden. Loopa medans det finns olästa bokstäver i raden.
-                if (buffer[i] == '\n') lines++; //Om byten som läses är \n så läggs det till en i integern lines.
+                if (buffer[i] == '\n')
+                    lines++; //Om byten som läses är \n så läggs det till en i integern lines.
             }
         }
 
